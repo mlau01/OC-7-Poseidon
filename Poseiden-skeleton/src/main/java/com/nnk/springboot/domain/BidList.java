@@ -13,7 +13,7 @@ public class BidList {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer BidListId;
+	private Integer id;
 	
 	private String account;
 	private String type;
@@ -39,18 +39,25 @@ public class BidList {
 	
 	
 	
+	public BidList() {
+	}
+
 	public BidList(String account, String type, Double bidQuantity) {
 		this.account = account;
 		this.type = type;
 		this.bidQuantity = bidQuantity;
 	}
 	
-	public Integer getBidListId() {
-		return BidListId;
+	
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setBidListId(Integer bidListId) {
-		BidListId = bidListId;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
 	public String getAccount() {
 		return account;
 	}
