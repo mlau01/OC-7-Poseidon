@@ -11,7 +11,10 @@ import java.sql.Date;
 @Table(name = "bidlist")
 public class BidList {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer BidListId;
+	
 	private String account;
 	private String type;
 	private Double bidQuantity;
