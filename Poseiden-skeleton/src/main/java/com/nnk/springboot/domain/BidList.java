@@ -15,8 +15,12 @@ public class BidList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotBlank(message = "Account is mandatory")
 	private String account;
+	
+	@NotBlank(message = "Type is mandatory")
 	private String type;
+
 	private Double bidQuantity;
 	private Double askQuantity;
 	private Double bid;
@@ -61,12 +65,16 @@ public class BidList {
 	public String getAccount() {
 		return account;
 	}
+	
+	@Required
 	public void setAccount(String account) {
 		this.account = account;
 	}
 	public String getType() {
 		return type;
 	}
+	
+	@Required
 	public void setType(String type) {
 		this.type = type;
 	}
