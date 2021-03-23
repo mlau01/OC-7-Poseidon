@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -24,11 +25,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().denyAll()
+		http.
+        authorizeRequests()
+        .antMatchers("/").permitAll()
+        .antMatchers("/login").permitAll()
+        .antMatchers("/registration").permitAll()
+        .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+        .authenticated().and().csrf().disable().formLogin()
+        .failureUrl("/login?error=true")
+        .defaultSuccessUrl("/admin/home")
+        .and().logout()
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutSuccessUrl("/login").and().exceptionHandling()
+        .accessDeniedPage("/access-denied");
+		/*
+		http.authorizeRequests()
 		.antMatchers("/").authenticated().anyRequest().permitAll()
 		.and()
 	.formLogin()
-		.loginPage("/login")
 		.defaultSuccessUrl("/home", true)
 		.permitAll()	
 		.and()
@@ -36,6 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.logoutUrl("/logout")
 		.logoutSuccessUrl("/login")
 		.permitAll();
-			
+			*/
 	}
 }
