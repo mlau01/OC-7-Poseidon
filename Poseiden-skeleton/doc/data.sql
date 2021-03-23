@@ -22,7 +22,7 @@ CREATE TABLE BidList (
   sourceListId VARCHAR(125),
   side VARCHAR(125),
 
-  PRIMARY KEY (BidListId)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Trade (
@@ -48,7 +48,7 @@ CREATE TABLE Trade (
   sourceListId VARCHAR(125),
   side VARCHAR(125),
 
-  PRIMARY KEY (TradeId)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE CurvePoint (
@@ -59,7 +59,7 @@ CREATE TABLE CurvePoint (
   value DOUBLE ,
   creationDate TIMESTAMP ,
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Rating (
@@ -69,7 +69,7 @@ CREATE TABLE Rating (
   fitchRating VARCHAR(125),
   orderNumber tinyint,
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE RuleName (
@@ -81,7 +81,7 @@ CREATE TABLE RuleName (
   sqlStr VARCHAR(125),
   sqlPart VARCHAR(125),
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE Users (
@@ -91,7 +91,7 @@ CREATE TABLE Users (
   fullname VARCHAR(125),
   role VARCHAR(125),
 
-  PRIMARY KEY (Id)
+  PRIMARY KEY (id)
 );
 
 insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");

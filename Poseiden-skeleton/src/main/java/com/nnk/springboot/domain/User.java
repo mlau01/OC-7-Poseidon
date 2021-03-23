@@ -12,15 +12,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "users")
 public class User implements Serializable, UserDetails {
+	
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
+    
     @NotBlank(message = "Username is mandatory")
     private String username;
+    
     @NotBlank(message = "Password is mandatory")
     private String password;
+    
     @NotBlank(message = "FullName is mandatory")
     private String fullname;
+    
     @NotBlank(message = "Role is mandatory")
     private String role;
 
