@@ -2,6 +2,8 @@ package com.nnk.springboot;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.services.IBidListService;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,13 +20,16 @@ public class BidTests {
 
 	@Autowired
 	private BidListRepository bidListRepository;
+	
+	@Autowired
+	private IBidListService bidListService;
 
 	@Test
 	public void bidListTest() {
 		BidList bid = new BidList("Account Test", "Type Test", 10d);
 
 		// Save
-		bid = bidListRepository.save(bid);
+		bid = bidListService.add(bid);
 		Assert.assertNotNull(bid.getId());
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 

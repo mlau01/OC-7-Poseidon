@@ -8,6 +8,8 @@ import com.nnk.springboot.repositories.BidListRepository;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @Service
 public class BidListServiceImpl implements IBidListService {
 	
@@ -21,6 +23,12 @@ public class BidListServiceImpl implements IBidListService {
 	
 	public List<BidList> list(){
 		return bidListRepo.findAll();
+	}
+
+	@Override
+	public BidList add(BidList bid) {
+		
+		return bidListRepo.save(bid);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.IBidListService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import javax.validation.Valid;
 
 @Controller
 public class BidListController {
+	
+	private static Logger log = LoggerFactory.getLogger(BidListController.class);
     
 	private IBidListService bidListService;
 	
@@ -28,19 +32,28 @@ public class BidListController {
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
+    	log.info("GET Request to /bidList/list");
         model.addAttribute("bidlist", bidListService.list());
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
+    	log.info("GET Request to /bidList/add");
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    	log.info("POST Request to /bidList/validate");
+    	if(result.hasErrors()) {
+    		return "bidList/add";
+    	}
+    	else {
+    		bidListService.add(bid);
+    	}
+        
+    	return "bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")

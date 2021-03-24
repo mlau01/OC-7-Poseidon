@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
@@ -21,6 +22,8 @@ public class BidList {
 	@NotBlank(message = "Type is mandatory")
 	private String type;
 
+	@Digits(integer = 10, fraction = 0)
+	@Min(value = 1)
 	private Double bidQuantity;
 	private Double askQuantity;
 	private Double bid;
