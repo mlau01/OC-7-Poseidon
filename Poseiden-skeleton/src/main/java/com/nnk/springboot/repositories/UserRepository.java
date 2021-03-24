@@ -10,5 +10,5 @@ import com.nnk.springboot.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
-	public Optional<User> findAllByUsername(String username);
+	public Optional<User> findByUsername(String username);
 }
