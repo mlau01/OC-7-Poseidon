@@ -52,7 +52,7 @@ public class BidListController {
     		return "bidList/add";
     	}
     	else {
-    		bidListService.add(bid);
+    		bidListService.save(bid);
     	}
         
     	return "bidList/list";
@@ -60,6 +60,7 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    	log.info("GET Request to /bidList/update/" + id);
         Optional<BidList> obid = bidListService.get(id);
         if(obid.isPresent()) {
         	model.addAttribute("bidList", obid.get());
@@ -70,7 +71,11 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+        if( ! result.hasErrors()) {
+        	bidListService.save(bidList);
+        } else {
+        	return "bidList/update";
+        }
         return "redirect:/bidList/list";
     }
 

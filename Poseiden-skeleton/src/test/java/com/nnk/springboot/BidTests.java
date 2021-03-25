@@ -29,17 +29,17 @@ public class BidTests {
 		BidList bid = new BidList("Account Test", "Type Test", 10d);
 
 		// Save
-		bid = bidListService.add(bid);
+		bid = bidListService.save(bid);
 		Assert.assertNotNull(bid.getId());
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 
 		// Update
 		bid.setBidQuantity(20d);
-		bid = bidListRepository.save(bid);
+		bid = bidListService.save(bid);
 		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
 
 		// Find
-		List<BidList> listResult = bidListRepository.findAll();
+		List<BidList> listResult = bidListService.list();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete

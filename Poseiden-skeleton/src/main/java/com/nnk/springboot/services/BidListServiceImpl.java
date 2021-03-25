@@ -27,7 +27,7 @@ public class BidListServiceImpl implements IBidListService {
 	}
 
 	@Override
-	public BidList add(BidList bid) {
+	public BidList save(BidList bid) {
 		
 		return bidListRepo.save(bid);
 	}

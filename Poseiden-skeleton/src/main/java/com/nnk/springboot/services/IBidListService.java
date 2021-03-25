@@ -9,7 +9,7 @@ public interface IBidListService {
 
 	public List<BidList> list();
 
-	public BidList add(BidList bid);
+	public BidList save(BidList bid);
 
 	public Optional<BidList> get(Integer id);
 }
