@@ -32,15 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         authorizeRequests()
         .antMatchers("/").permitAll()
         .antMatchers("/login").permitAll()
-        .antMatchers("/registration").permitAll()
-        .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+        .antMatchers("/user/**").hasAuthority("ADMIN").anyRequest()
         .authenticated().and().csrf().disable().formLogin()
         .failureUrl("/login?error=true")
-        .defaultSuccessUrl("/admin/home")
+        .defaultSuccessUrl("/bidList/list")
         .and().logout()
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .logoutRequestMatcher(new AntPathRequestMatcher("/app-logout"))
         .logoutSuccessUrl("/login").and().exceptionHandling()
-        .accessDeniedPage("/access-denied");
+        .accessDeniedPage("/app/error");
 		/*
 		http.authorizeRequests()
 		.antMatchers("/").authenticated().anyRequest().permitAll()
