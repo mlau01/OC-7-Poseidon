@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 
@@ -58,7 +60,10 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+        Optional<BidList> obid = bidListService.get(id);
+        if(obid.isPresent()) {
+        	model.addAttribute("bidList", obid.get());
+        }
         return "bidList/update";
     }
 

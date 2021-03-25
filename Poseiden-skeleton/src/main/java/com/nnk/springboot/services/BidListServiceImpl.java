@@ -7,6 +7,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -29,6 +30,11 @@ public class BidListServiceImpl implements IBidListService {
 	public BidList add(BidList bid) {
 		
 		return bidListRepo.save(bid);
+	}
+
+	@Override
+	public Optional<BidList> get(Integer id) {
+		return bidListRepo.findById(id);
 	}
 
 }

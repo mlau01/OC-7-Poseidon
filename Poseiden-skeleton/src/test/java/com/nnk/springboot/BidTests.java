@@ -45,7 +45,7 @@ public class BidTests {
 		// Delete
 		Integer id = bid.getId();
 		bidListRepository.delete(bid);
-		Optional<BidList> bidList = bidListRepository.findById(id);
+		Optional<BidList> bidList = bidListService.get(id);
 		Assert.assertFalse(bidList.isPresent());
 	}
 }
