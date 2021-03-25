@@ -22,7 +22,7 @@ public class BidList {
 	@NotBlank(message = "Type is mandatory")
 	private String type;
 
-	@Digits(integer = 10, fraction = 0)
+	@Digits(integer = 10, fraction = 2)
 	@Min(value = 1)
 	private Double bidQuantity;
 	private Double askQuantity;
