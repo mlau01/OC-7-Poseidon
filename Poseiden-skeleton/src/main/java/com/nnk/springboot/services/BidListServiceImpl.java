@@ -37,4 +37,13 @@ public class BidListServiceImpl implements IBidListService {
 		return bidListRepo.findById(id);
 	}
 
+	@Override
+	public void delete(Integer id) {
+		Optional<BidList> bid = get(id);
+		if(bid.isPresent()) {
+			bidListRepo.delete(bid.get());
+		}
+		
+	}
+
 }

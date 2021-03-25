@@ -71,6 +71,7 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
+    	log.info("POST Request to /bidList/update/" + id);
         if( ! result.hasErrors()) {
         	bidListService.save(bidList);
         } else {
@@ -81,7 +82,8 @@ public class BidListController {
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
+    	log.info("GET Request to /bidList/delete/" + id);
+        bidListService.delete(id);
         return "redirect:/bidList/list";
     }
 }

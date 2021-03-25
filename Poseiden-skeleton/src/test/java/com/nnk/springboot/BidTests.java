@@ -19,9 +19,6 @@ import java.util.Optional;
 public class BidTests {
 
 	@Autowired
-	private BidListRepository bidListRepository;
-	
-	@Autowired
 	private IBidListService bidListService;
 
 	@Test
@@ -44,7 +41,7 @@ public class BidTests {
 
 		// Delete
 		Integer id = bid.getId();
-		bidListRepository.delete(bid);
+		bidListService.delete(id);
 		Optional<BidList> bidList = bidListService.get(id);
 		Assert.assertFalse(bidList.isPresent());
 	}

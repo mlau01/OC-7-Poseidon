@@ -12,4 +12,6 @@ public interface IBidListService {
 	public BidList save(BidList bid);
 
 	public Optional<BidList> get(Integer id);
+
+	public void delete(Integer id);
 }
