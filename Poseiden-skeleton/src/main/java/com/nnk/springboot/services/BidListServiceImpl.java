@@ -1,15 +1,13 @@
 package com.nnk.springboot.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 @Service
 public class BidListServiceImpl implements IBidListService {

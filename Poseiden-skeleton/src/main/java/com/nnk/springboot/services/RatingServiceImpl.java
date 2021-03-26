@@ -10,12 +10,12 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 
 @Service
-public class RatingService implements IRatingService {
+public class RatingServiceImpl implements IRatingService {
 
 	private RatingRepository ratingRepository;
 	
 	@Autowired
-	public RatingService(RatingRepository p_ratingRepository) {
+	public RatingServiceImpl(RatingRepository p_ratingRepository) {
 		ratingRepository = p_ratingRepository;
 	}
 	
