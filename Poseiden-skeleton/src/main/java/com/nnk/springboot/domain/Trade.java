@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 
 @Entity
@@ -15,8 +14,10 @@ public class Trade {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotBlank
 	private String account;
 	
+	@NotBlank
 	private String type;
 	
 	private Double buyQuantity;

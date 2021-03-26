@@ -1,6 +1,11 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.services.ITradeService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,24 +18,36 @@ import javax.validation.Valid;
 
 @Controller
 public class TradeController {
-    // TODO: Inject Trade service
+    
+	private static Logger log = LoggerFactory.getLogger(TradeController.class);
+	
+	@Autowired
+	ITradeService tradeService;
 
     @RequestMapping("/trade/list")
     public String home(Model model)
     {
-        // TODO: find all Trade, add to model
+    	log.info("GET Request to /trade/list");
+        model.addAttribute("tradeList", tradeService.findAll());
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
     public String addUser(Trade bid) {
+    	log.info("GET Request to /trade/add");
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+        if(! result.hasErrors()) {
+        	tradeService.save(trade);
+        }
+        else {
+        	return "trade/add";	
+        }
+        
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
