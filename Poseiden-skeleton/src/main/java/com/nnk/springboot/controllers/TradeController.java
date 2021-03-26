@@ -40,6 +40,7 @@ public class TradeController {
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
+    	log.info("POST Request to /trade/validate");
         if(! result.hasErrors()) {
         	tradeService.save(trade);
         }
@@ -52,20 +53,30 @@ public class TradeController {
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+    	log.info("GET Request to /trade/update/" + id);
+    	Trade trade = tradeService.findById(id);
+    	if(trade != null) {
+    		model.addAttribute("trade", trade);
+    	}
         return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+    	log.info("POST Request to /trade/update/" + id);
+        if( ! result.hasErrors()) {
+        	tradeService.save(trade);
+        } else {
+        	return "trade/update";
+        }
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+    	log.info("GET Request to /trade/delete/" + id);
+        tradeService.delete(id);
         return "redirect:/trade/list";
     }
 }
