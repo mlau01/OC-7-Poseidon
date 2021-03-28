@@ -24,6 +24,13 @@ public class UserServiceImpl implements IUserService {
 		encoder = new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * Save an User in database based on the form data given
+	 * @param userForm UserForm object
+	 * @return User object saved in data base if successful
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	public User save(UserForm userForm) {
 		User user = new User();
 		user.setFullname(userForm.getFullname());
@@ -35,6 +42,13 @@ public class UserServiceImpl implements IUserService {
 		return userRepository.save(user);
 	}
 	
+	/**
+	 * Update an user datas based on the form data given
+	 * @param userForm UserForm object
+	 * @return User object updated in data base if successful
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	public User update(UserForm userForm) {
 		User user = new User();
 		user.setId(userForm.getId());
@@ -47,16 +61,35 @@ public class UserServiceImpl implements IUserService {
 		return userRepository.save(user);
 	}
 
+	/**
+	 * Delete an user
+	 * @param User object to delete
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public void delete(User user) {
 		userRepository.delete(user);
 	}
 
+	/**
+	 * List of all user
+	 * @return List<User>
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 
+	/**
+	 * Find a specific user.
+	 * @param id User ID.
+	 * @return User object if found, null otherwise.
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public User findById(Integer id) {
 		Optional<User> user = userRepository.findById(id);

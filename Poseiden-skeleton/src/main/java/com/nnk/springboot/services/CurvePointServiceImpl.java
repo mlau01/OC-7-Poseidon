@@ -17,16 +17,35 @@ public class CurvePointServiceImpl implements ICurvePointService {
 		curvePointRepository = p_curvePointRepo;
 	}
 	
+	/**
+	 * Save a curve point in data base
+	 * @param curve point to save
+	 * @return curve point saved if successful
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public CurvePoint save(CurvePoint curvePoint) {
 		return curvePointRepository.save(curvePoint);
 	}
 
+	/**
+	 * List all curve points
+	 * @return List<CurvePoint> curve point list
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public List<CurvePoint> findAll() {
 		return curvePointRepository.findAll();
 	}
 
+	/**
+	 * Delete a specific curve point
+	 * @param id curve point ID to delete
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public void delete(Integer id) {
 		Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
@@ -35,6 +54,13 @@ public class CurvePointServiceImpl implements ICurvePointService {
 		}
 	}
 
+	/**
+	 * Get a specific curve point
+	 * @param id curve point ID
+	 * @return CurvePoint object or null if not found
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public CurvePoint findById(Integer id) {
 		Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
