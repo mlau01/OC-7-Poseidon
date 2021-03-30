@@ -19,16 +19,35 @@ public class RatingServiceImpl implements IRatingService {
 		ratingRepository = p_ratingRepository;
 	}
 	
+	/**
+	 * Save a rating in data base
+	 * @param rating to save
+	 * @return rating saved if successful
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public Rating save(Rating rating) {
 		return ratingRepository.save(rating);
 	}
 
+	/**
+	 * List all ratings
+	 * @return List<Rating> rating list
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public List<Rating> findAll() {
 		return ratingRepository.findAll();
 	}
 
+	/**
+	 * Delete a specific rating
+	 * @param id rating ID to delete
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public void delete(Integer id) {
 		Rating rating = findById(id);
@@ -38,6 +57,13 @@ public class RatingServiceImpl implements IRatingService {
 
 	}
 
+	/**
+	 * Get a specific rating
+	 * @param id rating ID
+	 * @return Rating object if successful or null otherwise.
+	 * @author Mathias Lauer
+	 * 28 mars 2021
+	 */
 	@Override
 	public Rating findById(Integer id) {
 		Optional<Rating> rating = ratingRepository.findById(id);
