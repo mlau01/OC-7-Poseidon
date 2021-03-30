@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nnk.springboot.PasswordPatternException;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
@@ -29,8 +30,12 @@ public class UserServiceImpl implements IUserService {
 	 * @return User object saved in data base if successful
 	 * @author Mathias Lauer
 	 * 28 mars 2021
+	 * @throws PasswordPatternException 
 	 */
-	public User save(User user) {
+	public User save(User user) throws PasswordPatternException {
+		if( ! user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+			throw new PasswordPatternException("At least 8 chars, one digits, one uppercase and one special char");
+		}
          user.setPassword(encoder.encode(user.getPassword()));
          return userRepository.save(user);
 	}

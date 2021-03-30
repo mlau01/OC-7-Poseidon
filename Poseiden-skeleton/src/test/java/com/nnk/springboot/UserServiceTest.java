@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.IUserService;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Assert;
 
 @RunWith(SpringRunner.class)
@@ -19,11 +20,11 @@ public class UserServiceTest {
 	IUserService userService;
 	
 	@Test
-	public void userSaveTest_shouldReturnCreatedUser() {
+	public void userSaveTest_shouldReturnCreatedUser() throws PasswordPatternException {
 		User user = new User();
 		user.setFullname("tester");
 		user.setUsername("test");
-		user.setPassword("test");
+		user.setPassword("Testtest1!");
 		user.setRole("USER");
 		
 		User savedUser = userService.save(user);
@@ -32,5 +33,15 @@ public class UserServiceTest {
 		
 		userService.delete(savedUser);
 	}
-
+	
+	@Test
+	public void userSaveWithBadPasswordPattern_shouldThrowPasswordPatternException() throws PasswordPatternException {
+		User user = new User();
+		user.setFullname("tester");
+		user.setUsername("test");
+		user.setPassword("Test");
+		user.setRole("USER");
+		
+		Assertions.assertThatExceptionOfType(PasswordPatternException.class).isThrownBy( () -> userService.save(user));
+	}
 }
