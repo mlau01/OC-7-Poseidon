@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.PasswordPatternException;
+import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.IUserService;
 
@@ -54,6 +55,10 @@ public class UserController {
 			log.info("POST Request to /user/validate, error: " + e.getMessage());
 			result.addError(new FieldError("password", "password", e.getMessage()));
 	        return "user/add";
+		} catch (UsernameExistException e) {
+			log.info("POST Request to /user/validate, error: " + e.getMessage());
+			result.addError(new FieldError("username", "username", e.getMessage()));
+			return "user/add";
 		}
         
         return "redirect:/user/list";
@@ -85,6 +90,10 @@ public class UserController {
 		} catch (PasswordPatternException e) {
 			log.info("POST Request to /user/update" + id + ", error: " + e.getMessage());
 			result.addError(new FieldError("password", "password", e.getMessage()));
+			return "user/update";
+		} catch (UsernameExistException e) {
+			log.info("POST Request to /user/update" + id + ", error: " + e.getMessage());
+			result.addError(new FieldError("username", "username", e.getMessage()));
 			return "user/update";
 		}
         return "redirect:/user/list";

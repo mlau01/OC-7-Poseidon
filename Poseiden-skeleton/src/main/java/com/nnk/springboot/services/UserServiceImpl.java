@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nnk.springboot.PasswordPatternException;
+import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
@@ -31,12 +32,19 @@ public class UserServiceImpl implements IUserService {
 	 * @author Mathias Lauer
 	 * 28 mars 2021
 	 * @throws PasswordPatternException 
+	 * @throws UsernameExistException 
 	 */
-	public User save(User user) throws PasswordPatternException {
+	public User save(User user) throws PasswordPatternException, UsernameExistException {
+		if(userRepository.existsByUsername(user.getUsername())) {
+			throw new UsernameExistException("This user name already exist");
+		}
+		
 		if( ! user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
 			throw new PasswordPatternException("At least 8 chars, one digits, one uppercase and one special char");
 		}
+
          user.setPassword(encoder.encode(user.getPassword()));
+         
          return userRepository.save(user);
 	}
 

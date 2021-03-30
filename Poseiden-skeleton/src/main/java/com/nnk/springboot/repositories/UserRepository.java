@@ -11,4 +11,5 @@ import com.nnk.springboot.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecificationExecutor<User> {
 
 	public Optional<User> findByUsername(String username);
+	public boolean existsByUsername(String username);
 }

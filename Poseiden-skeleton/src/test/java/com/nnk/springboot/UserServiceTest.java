@@ -20,7 +20,7 @@ public class UserServiceTest {
 	IUserService userService;
 	
 	@Test
-	public void userSaveTest_shouldReturnCreatedUser() throws PasswordPatternException {
+	public void userSaveTest_shouldReturnCreatedUser() throws PasswordPatternException, UsernameExistException {
 		User user = new User();
 		user.setFullname("tester");
 		user.setUsername("test");
@@ -44,4 +44,17 @@ public class UserServiceTest {
 		
 		Assertions.assertThatExceptionOfType(PasswordPatternException.class).isThrownBy( () -> userService.save(user));
 	}
+	
+	@Test
+	public void userSaveWithExistingUsername_shouldThrowUsernameExistException() {
+		User user = new User();
+		user.setFullname("tester");
+		user.setUsername("admin");
+		user.setPassword("Test");
+		user.setRole("USER");
+		
+		Assertions.assertThatExceptionOfType(UsernameExistException.class).isThrownBy( () -> userService.save(user));
+	}
+	
+	
 }
