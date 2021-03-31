@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nnk.springboot.PasswordPatternException;
+import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.domain.UserForm;
 import com.nnk.springboot.repositories.UserRepository;
 
 @Service
@@ -30,35 +31,21 @@ public class UserServiceImpl implements IUserService {
 	 * @return User object saved in data base if successful
 	 * @author Mathias Lauer
 	 * 28 mars 2021
+	 * @throws PasswordPatternException 
+	 * @throws UsernameExistException 
 	 */
-	public User save(UserForm userForm) {
-		User user = new User();
-		user.setFullname(userForm.getFullname());
-		user.setUsername(userForm.getUsername());
-		user.setRole(userForm.getRole());
-
-		user.setPassword(encoder.encode(userForm.getPassword()));
+	public User save(User user) throws PasswordPatternException, UsernameExistException {
+		if(userRepository.existsByUsername(user.getUsername())) {
+			throw new UsernameExistException("This user name already exist");
+		}
 		
-		return userRepository.save(user);
-	}
-	
-	/**
-	 * Update an user datas based on the form data given
-	 * @param userForm UserForm object
-	 * @return User object updated in data base if successful
-	 * @author Mathias Lauer
-	 * 28 mars 2021
-	 */
-	public User update(UserForm userForm) {
-		User user = new User();
-		user.setId(userForm.getId());
-		user.setFullname(userForm.getFullname());
-		user.setUsername(userForm.getUsername());
-		user.setRole(userForm.getRole());
+		if( ! user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+			throw new PasswordPatternException("At least 8 chars, one digits, one uppercase and one special char");
+		}
 
-		user.setPassword(encoder.encode(userForm.getPassword()));
-		
-		return userRepository.save(user);
+         user.setPassword(encoder.encode(user.getPassword()));
+         
+         return userRepository.save(user);
 	}
 
 	/**
@@ -98,5 +85,4 @@ public class UserServiceImpl implements IUserService {
 		}
 		return null;
 	}
-
 }
