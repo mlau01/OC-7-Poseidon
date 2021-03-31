@@ -28,19 +28,23 @@ public class RuleNameController {
     public String home(Model model)
     {
     	log.info("GET Request to /ruleName/list");
+    	
         model.addAttribute("ruleNameList", ruleNameService.findAll());
+        
         return "ruleName/list";
     }
 
     @GetMapping("/ruleName/add")
     public String addRuleForm(RuleName bid) {
     	log.info("GET Request to /ruleName/add");
+    	
         return "ruleName/add";
     }
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
     	log.info("POST Request to /ruleName/validate");
+    	
         if(! result.hasErrors()) {
         	ruleNameService.save(ruleName);
         }
@@ -54,10 +58,12 @@ public class RuleNameController {
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
     	log.info("GET Request to /ruleName/update/" + id);
+    	
         RuleName ruleName = ruleNameService.findById(id);
         if(ruleName != null) {
         	model.addAttribute("ruleName", ruleName);
         }
+        
         return "ruleName/update";
     }
 
@@ -65,19 +71,23 @@ public class RuleNameController {
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
     	log.info("POST Request to /ruleName/update/" + id);
+    	
         if(! result.hasErrors()) {
         	ruleNameService.save(ruleName);
         }
         else {
         	return "ruleName/update";
         }
+        
         return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
     	log.info("GET Request to /ruleName/delete/" + id);
+    	
         ruleNameService.delete(id);
+        
         return "redirect:/ruleName/list";
     }
 }

@@ -30,7 +30,9 @@ public class UserController {
     public String home(Model model)
     {
     	log.info("GET Request to /user/list");
+    	
         model.addAttribute("users", userService.findAll());
+        
         return "user/list";
     }
 
@@ -38,6 +40,7 @@ public class UserController {
 
     public String addUser(User bid) {
     	log.info("GET Request to /user/add");
+    	
         return "user/add";
     }
 
@@ -45,6 +48,7 @@ public class UserController {
 
     public String validate(@Valid User user, BindingResult result, Model model) {
     	log.info("POST Request to /user/validate");
+    	
         if (result.hasErrors()) {
         	return "user/add";
         }
@@ -67,11 +71,13 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
     	log.info("GET Request to /user/update/" + id);
+    	
         User user = userService.findById(id);
         if(user != null) {
 	        user.setPassword("");
 	        model.addAttribute("user", user);
         }
+        
         return "user/update";
     }
 
@@ -79,11 +85,11 @@ public class UserController {
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
     	log.info("POST Request to /user/update/" + id);
+    	
         if (result.hasErrors()) {
             return "user/update";
         }
 
-        
         try {
 			userService.save(user);
 		} catch (PasswordPatternException e) {
@@ -95,11 +101,14 @@ public class UserController {
 			result.addError(new FieldError("username", "username", e.getMessage()));
 			return "user/update";
 		}
+        
         return "redirect:/user/list";
     }
 
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
+    	log.info("GET Request to /user/delete/" + id);
+    	
         User user = userService.findById(id);
         if(user != null) {
         	userService.delete(user);

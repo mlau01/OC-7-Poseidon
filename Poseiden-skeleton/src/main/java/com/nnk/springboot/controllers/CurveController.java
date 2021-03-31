@@ -28,19 +28,23 @@ public class CurveController {
     public String home(Model model)
     {
     	log.info("GET Request to /curvePoint/list");
+    	
         model.addAttribute("curvePointList", curvePointService.findAll());
+        
         return "curvePoint/list";
     }
 
     @GetMapping("/curvePoint/add")
     public String addBidForm(CurvePoint bid) {
     	log.info("GET Request to /curvePoint/add");
+    	
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
     public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
     	log.info("POST Request to /curvePoint/validate");
+    	
     	if( ! result.hasErrors()) {
     		curvePointService.save(curvePoint);
     		return "redirect:/curvePoint/list";
@@ -51,27 +55,36 @@ public class CurveController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    	log.info("GET Request to /curvePoint/update/" + id);
+    	
         CurvePoint curvePoint = curvePointService.findById(id);
         if(curvePoint != null) {
         	model.addAttribute("curvePoint", curvePoint);
         }
+        
         return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
+    	log.info("POST Request to /curvePoint/update/" + id);
+    	
     	if( ! result.hasErrors()) {
     		curvePointService.save(curvePoint);
     	} else {
     		return "curvePoint/update";
     	}
+    	
         return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    	log.info("GET Request to /curvePoint/delete/" + id);
+    	
         curvePointService.delete(id);
+        
         return "redirect:/curvePoint/list";
     }
 }
