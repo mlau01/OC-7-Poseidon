@@ -21,10 +21,14 @@ public class RuleNameController {
     
 	private static Logger log = LoggerFactory.getLogger(RuleNameController.class);
 	
-	@Autowired
 	private IRuleNameService ruleNameService;
 
-    @RequestMapping("/ruleName/list")
+	@Autowired
+    public RuleNameController(IRuleNameService p_ruleNameService) {
+		ruleNameService = p_ruleNameService;
+	}
+
+	@RequestMapping("/ruleName/list")
     public String home(Model model)
     {
     	log.info("GET Request to /ruleName/list");
