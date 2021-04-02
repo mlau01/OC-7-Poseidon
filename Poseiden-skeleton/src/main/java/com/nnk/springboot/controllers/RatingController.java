@@ -21,10 +21,14 @@ public class RatingController {
 	
 	private static Logger log = LoggerFactory.getLogger(RatingController.class);
     
+	private IRatingService ratingService;
+	
 	@Autowired
-	IRatingService ratingService;
+    public RatingController(IRatingService p_ratingService) {
+		this.ratingService = p_ratingService;
+	}
 
-    @RequestMapping("/rating/list")
+	@RequestMapping("/rating/list")
     public String home(Model model)
     {
     	log.info("GET Request to /rating/list");
