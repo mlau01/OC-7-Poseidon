@@ -7,11 +7,11 @@ import com.nnk.springboot.domain.BidList;
 
 public interface IBidListService {
 
-	public List<BidList> list();
+	public List<BidList> findAll();
 
 	public BidList save(BidList bid);
 
-	public Optional<BidList> get(Integer id);
+	public BidList findById(Integer id);
 
 	public void delete(Integer id);
 }

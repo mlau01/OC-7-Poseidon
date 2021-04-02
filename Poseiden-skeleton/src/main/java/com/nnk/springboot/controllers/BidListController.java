@@ -36,7 +36,7 @@ public class BidListController {
     {
     	log.info("GET Request to /bidList/list");
     	
-        model.addAttribute("bidlist", bidListService.list());
+        model.addAttribute("bidlist", bidListService.findAll());
         
         return "bidList/list";
     }
@@ -66,9 +66,9 @@ public class BidListController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
     	log.info("GET Request to /bidList/update/" + id);
     	
-        Optional<BidList> obid = bidListService.get(id);
-        if(obid.isPresent()) {
-        	model.addAttribute("bidList", obid.get());
+        BidList obid = bidListService.findById(id);
+        if(obid != null) {
+        	model.addAttribute("bidList", obid);
         }
         
         return "bidList/update";

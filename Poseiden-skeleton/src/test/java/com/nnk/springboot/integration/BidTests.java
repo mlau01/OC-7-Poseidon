@@ -36,13 +36,13 @@ public class BidTests {
 		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
 
 		// Find
-		List<BidList> listResult = bidListService.list();
+		List<BidList> listResult = bidListService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
 		Integer id = bid.getId();
 		bidListService.delete(id);
-		Optional<BidList> bidList = bidListService.get(id);
-		Assert.assertFalse(bidList.isPresent());
+		BidList bidList = bidListService.findById(id);
+		Assert.assertNull(bidList);
 	}
 }

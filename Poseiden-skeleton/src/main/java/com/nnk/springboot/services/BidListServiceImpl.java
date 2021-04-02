@@ -26,7 +26,7 @@ public class BidListServiceImpl implements IBidListService {
 	 * @author Mathias Lauer
 	 * 28 mars 2021
 	 */
-	public List<BidList> list(){
+	public List<BidList> findAll(){
 		return bidListRepo.findAll();
 	}
 
@@ -46,13 +46,19 @@ public class BidListServiceImpl implements IBidListService {
 	/**
 	 * Get a specific bid
 	 * @param id Bid ID
-	 * @return Optional<BidList>
+	 * @return BidList found or null otherwise
 	 * @author Mathias Lauer
 	 * 28 mars 2021
 	 */
 	@Override
-	public Optional<BidList> get(Integer id) {
-		return bidListRepo.findById(id);
+	public BidList findById(Integer id) {
+		Optional<BidList> bidList = bidListRepo.findById(id);
+		if(bidList.isPresent())
+		{
+			return bidList.get();
+		}
+		
+		return null;
 	}
 
 	/**
@@ -63,9 +69,9 @@ public class BidListServiceImpl implements IBidListService {
 	 */
 	@Override
 	public void delete(Integer id) {
-		Optional<BidList> bid = get(id);
-		if(bid.isPresent()) {
-			bidListRepo.delete(bid.get());
+		BidList bid = findById(id);
+		if(bid != null) {
+			bidListRepo.delete(bid);
 		}
 		
 	}
