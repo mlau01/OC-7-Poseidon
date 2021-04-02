@@ -21,8 +21,12 @@ public class CurveController {
     
 	private static Logger log = LoggerFactory.getLogger(CurveController.class);
 	
+	private ICurvePointService curvePointService;
+	
 	@Autowired
-	ICurvePointService curvePointService;
+	public CurveController(ICurvePointService p_curvePointService) {
+		curvePointService = p_curvePointService;
+	}
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
@@ -35,7 +39,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm(CurvePoint bid) {
+    public String addCurveForm(CurvePoint bid) {
     	log.info("GET Request to /curvePoint/add");
     	
         return "curvePoint/add";
@@ -66,7 +70,7 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+    public String updateCurve(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
                              BindingResult result, Model model) {
     	log.info("POST Request to /curvePoint/update/" + id);
     	
@@ -80,7 +84,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteCurve(@PathVariable("id") Integer id, Model model) {
     	log.info("GET Request to /curvePoint/delete/" + id);
     	
         curvePointService.delete(id);
