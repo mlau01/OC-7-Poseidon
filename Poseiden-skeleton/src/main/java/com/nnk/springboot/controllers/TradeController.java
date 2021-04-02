@@ -21,10 +21,14 @@ public class TradeController {
     
 	private static Logger log = LoggerFactory.getLogger(TradeController.class);
 	
-	@Autowired
-	ITradeService tradeService;
+	private ITradeService tradeService;
 
-    @RequestMapping("/trade/list")
+	@Autowired
+    public TradeController(ITradeService p_tradeService) {
+		tradeService = p_tradeService;
+	}
+
+	@RequestMapping("/trade/list")
     public String home(Model model)
     {
     	log.info("GET Request to /trade/list");

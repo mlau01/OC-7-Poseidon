@@ -13,11 +13,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.controllers.CurveController;
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.services.IBidListService;
 import com.nnk.springboot.services.ICurvePointService;
 
 @RunWith(MockitoJUnitRunner.class)
