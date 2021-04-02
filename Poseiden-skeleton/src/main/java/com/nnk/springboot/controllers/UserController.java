@@ -23,8 +23,12 @@ import com.nnk.springboot.services.IUserService;
 public class UserController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
     private IUserService userService;
+    
+    @Autowired
+    public UserController(IUserService p_userService) {
+		userService = p_userService;
+	}
 
     @RequestMapping("/user/list")
     public String home(Model model)
