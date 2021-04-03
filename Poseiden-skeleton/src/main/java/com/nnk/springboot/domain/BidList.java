@@ -1,6 +1,9 @@
 package com.nnk.springboot.domain;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.nnk.springboot.Application;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -16,32 +19,62 @@ public class BidList {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Length(max = 30, message = Application.CONSTRAINT_MESSAGE_30CHAR)
 	@NotBlank(message = "Account is mandatory")
 	private String account;
 	
+	@Length(max = 30, message = Application.CONSTRAINT_MESSAGE_30CHAR)
 	@NotBlank(message = "Type is mandatory")
 	private String type;
 
 	@Digits(integer = 10, fraction = 2)
 	@Min(value = 1)
 	private Double bidQuantity;
+	
 	private Double askQuantity;
 	private Double bid;
 	private Double ask;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String benchmark;
+	
 	private Date bidListDate;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String commentary;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String security;
+	
+	@Length(max = 10, message = Application.CONSTRAINT_MESSAGE_10CHAR)
 	private String status;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String trader;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String book;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String creationName;
+	
 	private Date creationDate;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String revisionName;
+	
 	private Date revisionDate;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String dealName;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String dealType;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String sourceListId;
+	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String side;
 	
 	
