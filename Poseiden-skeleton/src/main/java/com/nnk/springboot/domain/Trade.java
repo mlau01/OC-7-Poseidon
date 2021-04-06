@@ -3,6 +3,10 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.nnk.springboot.Application;
+
 import java.sql.Date;
 
 
@@ -15,9 +19,11 @@ public class Trade {
 	private Integer id;
 	
 	@NotBlank
+	@Length(max = 30, message = Application.CONSTRAINT_MESSAGE_30CHAR)
 	private String account;
 	
 	@NotBlank
+	@Length(max = 30, message = Application.CONSTRAINT_MESSAGE_30CHAR)
 	private String type;
 	
 	private Double buyQuantity;
@@ -28,32 +34,43 @@ public class Trade {
 	
 	private Double sellPrice;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String benchmark;
 	
 	private Date tradeDate;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String security;
 	
+	@Length(max = 10, message = Application.CONSTRAINT_MESSAGE_10CHAR)
 	private String status;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String trader;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String book;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String creationName;
 	
 	private Date creationDate;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String revisionName;
 	
 	private Date revisionDate;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String dealName;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String dealType;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String sourceListId;
 	
+	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
 	private String side;
 	
 	
