@@ -77,7 +77,7 @@ CREATE TABLE RuleName (
   name VARCHAR(125),
   description VARCHAR(125),
   json VARCHAR(125),
-  template VARCHAR(512),
+  template VARCHAR(125),
   sqlStr VARCHAR(125),
   sqlPart VARCHAR(125),
 
