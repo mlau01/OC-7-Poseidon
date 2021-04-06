@@ -1,16 +1,17 @@
 package com.nnk.springboot.domain;
 
-import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.factory.annotation.Required;
+import java.sql.Date;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import org.springframework.beans.factory.annotation.Required;
 
 
 @Entity
@@ -22,7 +23,6 @@ public class CurvePoint {
 	private Integer id;
 	
 	@NotNull
-	@Digits(integer = 10, fraction = 0)
     private Integer curveId;
     
     private Date asOfDate;
