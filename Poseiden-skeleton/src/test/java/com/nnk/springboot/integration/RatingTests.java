@@ -1,9 +1,12 @@
 package com.nnk.springboot.integration;
 
+import com.nnk.springboot.Application;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.services.IRatingService;
 
+import org.assertj.core.api.Assertions;
+import org.hibernate.validator.constraints.Length;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +16,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,5 +51,41 @@ public class RatingTests {
 		ratingService.delete(id);
 		Rating ratingList = ratingService.findById(id);
 		Assert.assertNull(ratingList);
+	}
+	
+	@Test
+	public void ratingConstraintsTest_shouldThrownConstraintViolationException() {
+		
+		Rating rating1 = new Rating("test", "test", "", 1);
+		Rating rating2 = new Rating("" ,"test" ,"test" ,1);
+		Rating rating3 = new Rating("test" ,"" ,"test" ,1);
+		
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating1));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating2));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating3));
+	}
+	
+	@Test
+	public void ratingSaveAttrsTest_shouldSaveCorrectlyAllAttrs() {
+		 String moodysRating = "Moodys Test";
+		 String sandPRating = "SandP Test";
+		 String fitchRating = "Fitch Test";
+		 Integer orderNumber = 1;
+		 
+		 Rating rating = new Rating();
+		 rating.setMoodysRating(moodysRating);
+		 rating.setSandPRating(sandPRating);
+		 rating.setFitchRating(fitchRating);
+		 rating.setOrderNumber(orderNumber);
+		 
+		 Rating savedRating = ratingService.save(rating);
+		 
+		 Assert.assertNotNull(savedRating.getId());
+		 Assert.assertEquals("moodysRating", moodysRating, savedRating.getMoodysRating());
+		 Assert.assertEquals("sandPRating", sandPRating, savedRating.getSandPRating());
+		 Assert.assertEquals("fitchRating", fitchRating, savedRating.getFitchRating());
+		 Assert.assertEquals("orderNumber", orderNumber, savedRating.getOrderNumber());
+		 
+		 ratingService.delete(savedRating.getId());
 	}
 }
