@@ -57,7 +57,7 @@ public class BidListController {
     		bidListService.save(bid);
     	}
         
-    	return "bidList/list";
+    	return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
