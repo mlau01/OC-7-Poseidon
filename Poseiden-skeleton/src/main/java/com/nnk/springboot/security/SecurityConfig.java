@@ -39,12 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         .antMatchers("/login").permitAll()
         
         //Restrain access to /user/ to role ADMIN only
-        .antMatchers("/user/**").hasAuthority("ADMIN").anyRequest()
-        
-        //Disable CSRF
-        .authenticated().and().csrf().disable()
-        
+        .antMatchers("/user/**").hasAuthority("ADMIN").anyRequest().authenticated()
+
         //Configuration login behavior
+        .and()
         .formLogin()
         .failureUrl("/login?error=true")
         .defaultSuccessUrl("/bidList/list")
