@@ -1,13 +1,17 @@
 package com.nnk.springboot.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.nnk.springboot.Application;
+import com.nnk.springboot.Const;
 
 @Entity
 @Table(name = "rating")
@@ -18,15 +22,15 @@ public class Rating {
 	private Integer id;
 	
 	@NotBlank
-	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
+	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
 	private String moodysRating;
 	
 	@NotBlank
-	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
+	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
 	private String sandPRating;
 	
 	@NotBlank
-	@Length(max = 125, message = Application.CONSTRAINT_MESSAGE_125CHAR)
+	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
 	private String fitchRating;
 	
 	@NotNull
