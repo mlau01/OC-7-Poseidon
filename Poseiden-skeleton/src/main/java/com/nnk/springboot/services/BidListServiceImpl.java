@@ -12,7 +12,6 @@ import com.nnk.springboot.repositories.BidListRepository;
 @Service
 public class BidListServiceImpl implements IBidListService {
 	
-	
 	private BidListRepository bidListRepo;
 	
 	@Autowired

@@ -32,7 +32,9 @@ public class BidList {
 	private Double bidQuantity;
 	
 	private Double askQuantity;
+	
 	private Double bid;
+	
 	private Double ask;
 	
 	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
