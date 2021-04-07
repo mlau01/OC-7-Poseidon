@@ -1,31 +1,73 @@
-# spring-boot
-## Technical:
+# Poseidon
+A Spring Boot application for collecting datas of bid/ask financial obligation
 
-1. Framework: Spring Boot v2.0.4
-2. Java 8
-3. Thymeleaf
-4. Bootstrap v.4.3.1
+This application use different technologies to achieve his purpose like:
+- Spring Security
+- Thymeleaf
+- Hibernate
+- Spring Data JPA
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+- Java 1.8
+- Maven 3.6.2
+- Mysql 8.0.17
+
+### Installing environment
+
+1.Install Java:
+
+https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html
+
+2.Install Maven:
+
+https://maven.apache.org/install.html
+
+3.Install MySql:
+
+https://dev.mysql.com/downloads/mysql/
+
+### Installing database structure
+
+Post installation of MySQL, Java and Maven, you will have to set up the tables and data in the data base.
+
+For this, please run the sql commands present in [data.sql](/doc/data.sql)
+
+### Installing App
+
+1.Clone this project using git:
+`git clone <url>`
+
+2.Install the app using maven:
+`mvn install`
+
+### Mysql connection
+The database connection is handled by application.properties, you need to edit this file and change login and password according to your mysql user
 
 
-## Setup with Intellij IDE
-1. Create project from Initializr: File > New > project > Spring Initializr
-2. Add lib repository into pom.xml
-3. Add folders
-    - Source root: src/main/java
-    - View: src/main/resources
-    - Static: src/main/resource/static
-4. Create database with name "demo" as configuration in application.properties
-5. Run sql script to create table doc/data.sql
+### Running Tests
 
-## Implement a Feature
-1. Create mapping domain class and place in package com.nnk.springboot.domain
-2. Create repository class and place in package com.nnk.springboot.repositories
-3. Create controller class and place in package com.nnk.springboot.controllers
-4. Create view files and place in src/main/resource/templates
+Run tests:
+`mvn test`
 
-## Write Unit Test
-1. Create unit test and place in package com.nnk.springboot in folder test > java
+### Running App
 
-## Security
-1. Create user service to load user from  database and place in package com.nnk.springboot.services
-2. Add configuration class and place in package com.nnk.springboot.config
+Using java in command line:
+
+`java -jar <target/last_snapshot.jar>`
+
+### Access Datas
+The web server listen on port 8080.
+
+### Test Account
+login: admin
+password: 123456
+
+login: user
+password: 123456
