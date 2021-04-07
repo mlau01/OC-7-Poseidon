@@ -3,16 +3,23 @@ package com.nnk.springboot.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repositories.CurvePointRepository;
 
 @Service
 public class CurvePointServiceImpl implements ICurvePointService {
 
+	private static Logger log = LoggerFactory.getLogger(CurvePointServiceImpl.class);
+	
 	private CurvePointRepository curvePointRepository;
 	
+	@Autowired
 	public CurvePointServiceImpl(CurvePointRepository p_curvePointRepo) {
 		curvePointRepository = p_curvePointRepo;
 	}
@@ -50,7 +57,10 @@ public class CurvePointServiceImpl implements ICurvePointService {
 	public void delete(Integer id) {
 		Optional<CurvePoint> curvePoint = curvePointRepository.findById(id);
 		if(curvePoint.isPresent()) {
+			log.info("Deleting CurvePoint id:" + id);
 			curvePointRepository.delete(curvePoint.get());
+		} else {
+			log.error("Error deleting CurvePoint id not found: " + id);
 		}
 	}
 

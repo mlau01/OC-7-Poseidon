@@ -50,7 +50,7 @@ public class CurvePointTests {
 	
 	@Test
 	public void curvePointConstraintsTest_shouldThrownConstraintViolationException() {
-		CurvePoint curve1 = new CurvePoint(null, 10d, 11d);
+		CurvePoint curve1 = new CurvePoint(null, 14d, 15d);
 		CurvePoint curve2 = new CurvePoint(1, 10.0001d, 11d);
 		CurvePoint curve3 = new CurvePoint(1, 10d, 11.0001d);
 		
@@ -61,10 +61,10 @@ public class CurvePointTests {
 	
 	@Test
 	public void curvePointSaveAllAttrsTest_shouldCorreclySaveAllAttrs() {
-	     Integer curveId = 1;
+	     Integer curveId = 15;
 	     Date asOfDate = new Date(2000,5,30);
-	     Double term = 10d;
-	     Double value = 11d;
+	     Double term = 9d;
+	     Double value = 20d;
 	     Date creationDate  = new Date(2000,5,30);
 	     
 	     CurvePoint curve = new CurvePoint();
@@ -76,12 +76,13 @@ public class CurvePointTests {
 	     
 	     CurvePoint savedCurve = curvePointService.save(curve);
 	     
+	     Assert.assertNotNull(savedCurve.getId());
 	     Assert.assertEquals("curveId", curveId, savedCurve.getCurveId());
 	     Assert.assertEquals("asOfDate", asOfDate, savedCurve.getAsOfDate());
 	     Assert.assertEquals("term", term, savedCurve.getTerm());
 	     Assert.assertEquals("value", value, savedCurve.getValue());
 	     Assert.assertEquals("creationDate", creationDate, savedCurve.getCreationDate());
 	     
-	     curvePointService.delete(savedCurve.getCurveId());
+	     curvePointService.delete(savedCurve.getId());
 	}
 }
