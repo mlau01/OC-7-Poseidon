@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = (userRepository.findByUsername(username))
 				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
 		
-		//Set authorities
+		//Get authorities
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority(user.getRole()));
 		

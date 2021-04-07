@@ -18,7 +18,6 @@ public class UserServiceImpl implements IUserService {
 	private UserRepository userRepository;
 	private BCryptPasswordEncoder encoder;
 	
-	
 	@Autowired
 	public UserServiceImpl(UserRepository p_userRepositoty) {
 		userRepository = p_userRepositoty;
@@ -26,12 +25,12 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	/**
-	 * Save an User in database based on the form data given
-	 * @param userForm UserForm object
+	 * Save an User in database
+	 * @param user User Object to save
 	 * @return User object saved in data base if successful
 	 * @author Mathias Lauer
 	 * 28 mars 2021
-	 * @throws PasswordPatternException 
+	 * @throws PasswordPatternException
 	 * @throws UsernameExistException 
 	 */
 	public User save(User user) throws PasswordPatternException, UsernameExistException {

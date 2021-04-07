@@ -27,7 +27,6 @@ public class UserTests {
 	@InjectMocks
 	private UserServiceImpl userService;
 	 
-	
 	@Test
 	public void userSaveWithBadPasswordPattern_shouldThrowPasswordPatternException() throws PasswordPatternException {
 		
@@ -40,8 +39,6 @@ public class UserTests {
 		user.setRole("USER");
 
 		Assertions.assertThatExceptionOfType(PasswordPatternException.class).isThrownBy( () -> userService.save(user));
-		
-		verify(userRepository, Mockito.times(1)).existsByUsername(anyString());
 	}
 	
 	@Test
