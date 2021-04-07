@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.exceptions;
 
 public class UsernameExistException extends Exception {
 	

@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.PasswordPatternException;
+import com.nnk.springboot.exceptions.UsernameExistException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserServiceImpl;
 

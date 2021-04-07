@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.nnk.springboot.PasswordPatternException;
-import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.PasswordPatternException;
+import com.nnk.springboot.exceptions.UsernameExistException;
 import com.nnk.springboot.services.IUserService;
 
 @RunWith(SpringRunner.class)

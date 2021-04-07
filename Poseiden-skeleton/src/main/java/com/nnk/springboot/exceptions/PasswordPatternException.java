@@ -1,4 +1,4 @@
-package com.nnk.springboot;
+package com.nnk.springboot.exceptions;
 
 public class PasswordPatternException extends Exception {
 	

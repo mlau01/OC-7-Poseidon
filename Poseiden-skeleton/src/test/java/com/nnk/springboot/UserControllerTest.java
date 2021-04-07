@@ -17,6 +17,8 @@ import org.springframework.validation.BindingResult;
 
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.PasswordPatternException;
+import com.nnk.springboot.exceptions.UsernameExistException;
 import com.nnk.springboot.services.IUserService;
 
 @RunWith(MockitoJUnitRunner.class)

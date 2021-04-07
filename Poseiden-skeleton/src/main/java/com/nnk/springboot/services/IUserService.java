@@ -2,9 +2,9 @@ package com.nnk.springboot.services;
 
 import java.util.List;
 
-import com.nnk.springboot.PasswordPatternException;
-import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.PasswordPatternException;
+import com.nnk.springboot.exceptions.UsernameExistException;
 
 public interface IUserService {
 

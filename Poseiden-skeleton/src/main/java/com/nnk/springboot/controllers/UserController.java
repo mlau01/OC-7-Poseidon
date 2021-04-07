@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nnk.springboot.PasswordPatternException;
-import com.nnk.springboot.UsernameExistException;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.exceptions.PasswordPatternException;
+import com.nnk.springboot.exceptions.UsernameExistException;
 import com.nnk.springboot.services.IUserService;
 
 @Controller
