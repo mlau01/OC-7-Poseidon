@@ -6,27 +6,27 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.repositories.BidListRepository;
+import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.repositories.BidRepository;
 
 @Service
-public class BidListServiceImpl implements IBidListService {
+public class BidServiceImpl implements IBidService {
 	
-	private BidListRepository bidListRepo;
+	private BidRepository bidRepo;
 	
 	@Autowired
-	public BidListServiceImpl(BidListRepository p_bidListRepo) {
-		bidListRepo = p_bidListRepo;
+	public BidServiceImpl(BidRepository p_bidRepo) {
+		bidRepo = p_bidRepo;
 	}
 	
 	/**
 	 * List all Bids
-	 * @return List<BidList> bid list
+	 * @return List<bid> bid list
 	 * @author Mathias Lauer
 	 * 28 mars 2021
 	 */
-	public List<BidList> findAll(){
-		return bidListRepo.findAll();
+	public List<Bid> findAll(){
+		return bidRepo.findAll();
 	}
 
 	/**
@@ -37,24 +37,24 @@ public class BidListServiceImpl implements IBidListService {
 	 * 28 mars 2021
 	 */
 	@Override
-	public BidList save(BidList bid) {
+	public Bid save(Bid bid) {
 		
-		return bidListRepo.save(bid);
+		return bidRepo.save(bid);
 	}
 
 	/**
 	 * Get a specific bid
 	 * @param id Bid ID
-	 * @return BidList found or null otherwise
+	 * @return bid found or null otherwise
 	 * @author Mathias Lauer
 	 * 28 mars 2021
 	 */
 	@Override
-	public BidList findById(Integer id) {
-		Optional<BidList> bidList = bidListRepo.findById(id);
-		if(bidList.isPresent())
+	public Bid findById(Integer id) {
+		Optional<Bid> bid = bidRepo.findById(id);
+		if(bid.isPresent())
 		{
-			return bidList.get();
+			return bid.get();
 		}
 		
 		return null;
@@ -68,9 +68,9 @@ public class BidListServiceImpl implements IBidListService {
 	 */
 	@Override
 	public void delete(Integer id) {
-		BidList bid = findById(id);
+		Bid bid = findById(id);
 		if(bid != null) {
-			bidListRepo.delete(bid);
+			bidRepo.delete(bid);
 		}
 		
 	}

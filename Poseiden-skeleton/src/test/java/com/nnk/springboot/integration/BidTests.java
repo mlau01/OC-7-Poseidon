@@ -13,65 +13,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.services.IBidListService;
+import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.services.IBidService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BidTests {
 
 	@Autowired
-	private IBidListService bidListService;
+	private IBidService bidService;
 
 	@Test
-	public void bidListCrudTest_shouldProcessAllCrudFeatures() {
-		BidList bid = new BidList("Account Test", "Type Test", 10d);
+	public void bidCrudTest_shouldProcessAllCrudFeatures() {
+		Bid bid = new Bid("Account Test", "Type Test", 10d);
 
 		// Save
-		bid = bidListService.save(bid);
+		bid = bidService.save(bid);
 		Assert.assertNotNull(bid.getId());
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 
 		// Update
 		bid.setBidQuantity(20d);
-		bid = bidListService.save(bid);
+		bid = bidService.save(bid);
 		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
 
 		// Find
-		List<BidList> listResult = bidListService.findAll();
+		List<Bid> listResult = bidService.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
 		Integer id = bid.getId();
-		bidListService.delete(id);
-		BidList bidList = bidListService.findById(id);
-		Assert.assertNull(bidList);
+		bidService.delete(id);
+		bid = bidService.findById(id);
+		Assert.assertNull(bid);
 	}
 	
 	@Test
-	public void bidListConstrainTest_shouldThrowConstrainViolationException() {
-		BidList bid1 = new BidList("test", "", 10d);
-		BidList bid2 = new BidList("", "test", 10d);
-		BidList bid3 = new BidList("test", "test", 10.001d);
+	public void bidConstrainTest_shouldThrowConstrainViolationException() {
+		Bid bid1 = new Bid("test", "", 10d);
+		Bid bid2 = new Bid("", "test", 10d);
+		Bid bid3 = new Bid("test", "test", 10.001d);
 		
-		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidListService.save(bid1));
-		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidListService.save(bid2));
-		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidListService.save(bid3));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid1));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid2));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid3));
 		
 	}
 	
 	
 	@Test
-	public void BidListAllAttrTest_shouldSaveAllAttrCorrectly() {
+	public void bidAllAttrTest_shouldSaveAllAttrCorrectly() {
 		// Prepare
 		String account = "Account test";
 		String type = "Type test";
 		Double bidQuantity = 10d;
 		Double askQuantity = 11d;
-		Double bid = 12d;
+		Double abid = 12d;
 		Double ask = 13d;
 		String benchmark = "Bench test";
-		Date bidListDate = new Date(2000,5,30);
+		Date bidDate = new Date(2000,5,30);
 		String commentary = "Comm test";
 		String security = "Secu test";
 		String status = "test_st";
@@ -86,28 +86,28 @@ public class BidTests {
 		String sourceListId = "Source test";
 		String side = "Side test";
 		
-		BidList bidList = new BidList(account, type, bidQuantity);
-		bidList.setAskQuantity(askQuantity);
-		bidList.setAsk(ask);
-		bidList.setBid(bid);
-		bidList.setBenchmark(benchmark);
-		bidList.setBidListDate(bidListDate);
-		bidList.setCommentary(commentary);
-		bidList.setSecurity(security);
-		bidList.setStatus(status);
-		bidList.setTrader(trader);
-		bidList.setBook(book);
-		bidList.setCreationName(creationName);
-		bidList.setCreationDate(creationDate);
-		bidList.setRevisionName(revisionName);
-		bidList.setRevisionDate(revisionDate);
-		bidList.setDealName(dealName);
-		bidList.setDealType(dealType);
-		bidList.setSourceListId(sourceListId);
-		bidList.setSide(side);
+		Bid bid = new Bid(account, type, bidQuantity);
+		bid.setAskQuantity(askQuantity);
+		bid.setAsk(ask);
+		bid.setBid(abid);
+		bid.setBenchmark(benchmark);
+		bid.setBidListDate(bidDate);
+		bid.setCommentary(commentary);
+		bid.setSecurity(security);
+		bid.setStatus(status);
+		bid.setTrader(trader);
+		bid.setBook(book);
+		bid.setCreationName(creationName);
+		bid.setCreationDate(creationDate);
+		bid.setRevisionName(revisionName);
+		bid.setRevisionDate(revisionDate);
+		bid.setDealName(dealName);
+		bid.setDealType(dealType);
+		bid.setSourceListId(sourceListId);
+		bid.setSide(side);
 
 		// Save
-		BidList bidSaved = bidListService.save(bidList);
+		Bid bidSaved = bidService.save(bid);
 		
 		// Assert
 		Assert.assertNotNull(bidSaved.getId());
@@ -118,7 +118,7 @@ public class BidTests {
 		Assert.assertEquals("bid", bid, bidSaved.getBid());
 		Assert.assertEquals("ask", ask, bidSaved.getAsk());
 		Assert.assertEquals("benchmark", benchmark, bidSaved.getBenchmark());
-		Assert.assertEquals("bidListDate", bidListDate, bidSaved.getBidListDate());
+		Assert.assertEquals("bidDate", bidDate, bidSaved.getBidListDate());
 		Assert.assertEquals("commentary", commentary, bidSaved.getCommentary());
 		Assert.assertEquals("security", security, bidSaved.getSecurity());
 		Assert.assertEquals("status", status, bidSaved.getStatus());
@@ -134,6 +134,6 @@ public class BidTests {
 		Assert.assertEquals("side", side, bidSaved.getSide());
 		
 		// Clean
-		bidListService.delete(bidSaved.getId());
+		bidService.delete(bidSaved.getId());
 	}
 }

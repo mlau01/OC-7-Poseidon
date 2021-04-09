@@ -13,29 +13,28 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import com.nnk.springboot.controllers.BidListController;
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.services.IBidListService;
+import com.nnk.springboot.controllers.BidController;
+import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.services.IBidService;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BidListControllerTest {
+public class BidControllerTest {
 	
 	@Mock
-	private IBidListService bidListService;
+	private IBidService bidListService;
 	
 	@Mock
 	private Model model;
 	
 	@Mock
-	private BidList bidList;
+	private Bid bidList;
 	
 	@Mock
 	private BindingResult bindingResult;
 	
 	@InjectMocks
-	private BidListController controller = new BidListController(bidListService);
+	private BidController controller = new BidController(bidListService);
 	
-
 	@Test
 	public void bidListTest_shouldCallServiceList() {
 		when(bidListService.findAll()).thenReturn(null);
