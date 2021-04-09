@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -30,6 +33,9 @@ public class Trade {
 	@Length(max = 30, message = Const.CONSTRAINT_MESSAGE_30CHAR)
 	private String type;
 	
+	@Digits(integer = 10, fraction = 2)
+	@Min(value = 1)
+	@NotNull
 	private Double buyQuantity;
 	
 	private Double sellQuantity;
