@@ -117,7 +117,7 @@ public class BidTests {
 		Assert.assertEquals("Type", type, bidSaved.getType());
 		Assert.assertEquals("bidQuantity", bidQuantity, bidSaved.getBidQuantity());
 		Assert.assertEquals("askQuantity", askQuantity, bidSaved.getAskQuantity());
-		Assert.assertEquals("bid", bid, bidSaved.getBid());
+		Assert.assertEquals("abid", abid, bidSaved.getBid());
 		Assert.assertEquals("ask", ask, bidSaved.getAsk());
 		Assert.assertEquals("benchmark", benchmark, bidSaved.getBenchmark());
 		Assert.assertEquals("bidDate", bidDate, bidSaved.getBidListDate());
