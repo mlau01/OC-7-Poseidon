@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import java.sql.Date;
 
 @Entity
@@ -29,17 +31,18 @@ public class Bid {
 
 	@Digits(integer = 10, fraction = 2)
 	@Min(value = 1)
+	@NotNull
 	private Double bidQuantity;
 	
 	private Double askQuantity;
-	
+
 	private Double bid;
-	
+
 	private Double ask;
 	
 	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
 	private String benchmark;
-	
+
 	private Date bidListDate;
 	
 	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
@@ -59,7 +62,7 @@ public class Bid {
 	
 	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)
 	private String creationName;
-	
+
 	private Date creationDate;
 	
 	@Length(max = 125, message = Const.CONSTRAINT_MESSAGE_125CHAR)

@@ -59,10 +59,12 @@ public class RatingTests {
 		Rating rating1 = new Rating("test", "test", "", 1);
 		Rating rating2 = new Rating("" ,"test" ,"test" ,1);
 		Rating rating3 = new Rating("test" ,"" ,"test" ,1);
+		Rating rating4 = new Rating("test" ,"test" ,"test" ,null);
 		
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating1));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating2));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating3));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> ratingService.save(rating4));
 	}
 	
 	@Test

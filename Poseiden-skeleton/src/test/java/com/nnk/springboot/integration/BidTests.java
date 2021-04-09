@@ -53,10 +53,12 @@ public class BidTests {
 		Bid bid1 = new Bid("test", "", 10d);
 		Bid bid2 = new Bid("", "test", 10d);
 		Bid bid3 = new Bid("test", "test", 10.001d);
+		Bid bid4 = new Bid("test", "test", null);
 		
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid1));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid2));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid3));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> bidService.save(bid4));
 		
 	}
 	

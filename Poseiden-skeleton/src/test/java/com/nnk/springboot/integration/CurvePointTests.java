@@ -53,10 +53,14 @@ public class CurvePointTests {
 		CurvePoint curve1 = new CurvePoint(null, 14d, 15d);
 		CurvePoint curve2 = new CurvePoint(1, 10.0001d, 11d);
 		CurvePoint curve3 = new CurvePoint(1, 10d, 11.0001d);
+		CurvePoint curve4 = new CurvePoint(1, null, 15d);
+		CurvePoint curve5 = new CurvePoint(1, 15d, null);
 		
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> curvePointService.save(curve1));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> curvePointService.save(curve2));
 		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> curvePointService.save(curve3));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> curvePointService.save(curve4));
+		Assertions.assertThatExceptionOfType(ConstraintViolationException.class).isThrownBy( () -> curvePointService.save(curve5));
 	}
 	
 	@Test

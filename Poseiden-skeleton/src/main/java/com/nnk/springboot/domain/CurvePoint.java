@@ -29,10 +29,12 @@ public class CurvePoint {
     
 	@Digits(integer = 10, fraction = 2)
 	@Min(value = 1)
+	@NotNull
     private Double term;
     
 	@Digits(integer = 10, fraction = 2)
 	@Min(value = 1)
+	@NotNull
     private Double value;
     
     private Date creationDate;
